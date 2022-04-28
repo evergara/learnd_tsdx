@@ -9,24 +9,34 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+variables:
+  major: 1
+  minor: 0
+name: $(major).$(minor).$(Rev:.rr)
+
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '10.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-
 - task: Npm@1
+  displayName: npm install
   inputs:
-    command: 'publish'
+    verbose: false
+- task: Npm@1
+  displayName: npm run build
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: run build
+- task: Npm@1
+  displayName: npm publish
+  condition: and(Succeeded(), ne(variables['Build.Reason'],'PullRequest'))
+  inputs:
+    command: custom
     verbose: false
     customCommand: publish
+    customRegistry: useFeed
+    customFeed: '911da023-3b2e-4a31-bac7-e55d0af25196/9904f525-0b6b-47b5-85a1-686f8a6941a5'
+
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: tool-general'
+  condition: and(Succeeded(), ne(variables['Build.Reason'],'PullRequest'))
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'Publish Artifact: tsdx'
-    publishLocation: 'Container'
+    ArtifactName: tool-general
