@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- main
+- master-flow
 
 pool:
   vmImage: ubuntu-latest
@@ -25,6 +25,13 @@ steps:
     command: custom
     verbose: false
     customCommand: run build
+
+- task: Npm@1
+  displayName: npm run test
+  inputs:
+    command: custom
+    verbose: false
+    customCommand: run test
 - task: Npm@1
   displayName: npm publish
   condition: and(Succeeded(), ne(variables['Build.Reason'],'PullRequest'))
