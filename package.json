@@ -1,4 +1,6 @@
 {
+  "name": "@eco/tool-general",
+  "description": "Libreria de herramientas",
   "version": "0.1.0",
   "license": "MIT",
   "main": "dist/index.js",
@@ -33,7 +35,6 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "tool-general",
   "author": "Emerson Vergara",
   "module": "dist/tool-general.esm.js",
   "size-limit": [
