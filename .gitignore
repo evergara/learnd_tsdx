@@ -5,5 +5,6 @@ dist
 tester
 tester-react
 package-lock.json
+coverage
 # Local Netlify folder
 .netlify
