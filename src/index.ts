@@ -1,1 +1,1 @@
-export { CalculatorServices } from './services/calculator.services';
+export { CalculatorServices } from './utils/calculator.services';

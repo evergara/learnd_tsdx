@@ -1,4 +1,4 @@
-import { CalculatorServices } from './../../src/services/calculator.services';
+import { CalculatorServices } from './../../src/utils/calculator.services';
 
 describe('Calculator Services', () => {
   let cal: CalculatorServices;
